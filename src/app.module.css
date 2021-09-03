@@ -1,0 +1,29 @@
+.app {
+    display: flex;
+}
+
+ form {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-evenly;
+     height: 200px;
+     padding: 20px;
+     border: 1px solid black;
+ }
+
+ .block {
+     margin: 20px;
+ }
+
+
+  input {
+      width: 2rem;
+  }
+
+label {
+    margin-right: 0.6rem;
+}
+
+.introduce select {
+ margin-left: 0.6rem;
+}
