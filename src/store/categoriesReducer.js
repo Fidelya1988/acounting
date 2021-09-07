@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { formatDiagnostic } from "typescript";
+
 
 const categoriesSlice = createSlice({
   name: "categories",
