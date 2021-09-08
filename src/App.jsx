@@ -3,22 +3,9 @@ import React, { useState } from "react";
 import styles from "./app.module.css";
 import { useSelector} from "react-redux";
 import CountingForm from "./Form/CountingForm";
-import { setCoeff } from "./store/categoriesReducer";
-const sliceSum = (sum) => {
-  const i = sum.indexOf(".");
-  return i !== -1 ? sum.slice(0, i + 3) : sum;
-};
-const useNewSum = (array, currency, setNewValue, sliceSum) => {
-  React.useEffect(() => {
-    array.find((el) => {
-      console.log(currency);
-      if (el.name === currency) {
-        const editedSum = sliceSum(String(el.sum));
-        setNewValue(String(editedSum));
-      }
-    });
-  }, [array, setNewValue, currency, sliceSum]);
-};
+import Categories from "./Categories/Categories";
+import { useNewSum } from "./helpers/useNewSum";
+
 function App() {
   const { income, expense } = useSelector((state) => state.toolkit);
   const { categories} = useSelector((state) => state.categories);
@@ -26,15 +13,7 @@ function App() {
   const [newIncome, setNewIncome] = useState();
   const [newExpense, setNewExpense] = useState();
 
-  const categoriesExspenses = categories.map(
-    (c) =>
-      c.type === "expense" && (
-        <div key={c.id}>
-          {c.name} 
-        </div>
-      )
-  );
-
+ 
   const currencyChange = React.useCallback(
     (e) => {
       const current = e.target.value;
@@ -47,8 +26,8 @@ function App() {
     },
     [income, setCurrency]
   );
-  useNewSum(income, currency, setNewIncome, sliceSum);
-  useNewSum(expense, currency, setNewExpense, sliceSum);
+  useNewSum(income, currency, setNewIncome);
+  useNewSum(expense, currency, setNewExpense);
   return (
     <div className={styles.app}>
       <CountingForm />
@@ -68,8 +47,8 @@ function App() {
       <div className={styles.block}>
         <h1>Expenses</h1>
         <span> {newExpense ? newExpense : 0}</span> {currency}
-        <div> {categoriesExspenses}</div>
-        <button>+</button>
+        <Categories currency={currency}/>
+      
       </div>
     </div>
   );

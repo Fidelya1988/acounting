@@ -3,7 +3,7 @@ import React from "react";
 import styles from "../app.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { changeIncome, changeExpense } from "../store/toolkitReducer";
-import { changeSum } from "../store/categoriesReducer";
+import { changeCategory } from "../store/categoriesReducer";
 
 import { Formik, Form, Field } from "formik";
 const validation = (values) => {
@@ -21,7 +21,7 @@ export default function CountingForm() {
     (introduce,  category, type) => {
       type === "expense" && dispatch(changeExpense({ data: introduce }));
       type === "income" && dispatch(changeIncome({ data: introduce }));
-      dispatch(changeSum({ name: category, sum: introduce }));
+      dispatch(changeCategory({ name: category, sum: introduce }));
     },
     [dispatch]
   );

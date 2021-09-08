@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { getSum } from "../helpers/getSum";
 const categoriesSlice = createSlice({
   name: "categories",
   initialState: {
@@ -39,10 +39,10 @@ const categoriesSlice = createSlice({
     setCoeff(state, action) {
       state.coefficient = action.payload.coefficient;
     },
-    changeSum(state, action) {
+    changeCategory(state, action) {
       state.categories.forEach((el) =>
         el.name === action.payload.name
-          ? (el.sum += Number(action.payload.sum) * Number(el.coefficient))
+          ? (el.sum = getSum(action.payload.sum, el.sum))
           : el
       );
     },
@@ -50,5 +50,5 @@ const categoriesSlice = createSlice({
 });
 
 export default categoriesSlice.reducer;
-export const { addCategory, deleteCategory, changeSum, setCoeff } =
+export const { addCategory, deleteCategory, changeCategory} =
   categoriesSlice.actions;
