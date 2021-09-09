@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getSum } from "../helpers/getSum";
+import { getCurrencyExchange } from "../helpers/getCurrencyExchange";
+const foodSum = getCurrencyExchange();
+const rentSum = getCurrencyExchange();
 const categoriesSlice = createSlice({
   name: "categories",
   initialState: {
@@ -9,21 +12,13 @@ const categoriesSlice = createSlice({
         name: "Food",
         id: "1",
         type: "expense",
-        sum: [
-          { name: "uah", ratio: 1, sum: 0 },
-          { name: "usd", ratio: 26.9, sum: 0 },
-          { name: "euro", ratio: 31.56, sum: 0 },
-        ],
+        sum: foodSum,
       },
       {
         name: "Rent",
         id: "2",
         type: "expense",
-        sum: [
-          { name: "uah", ratio: 1, sum: 0 },
-          { name: "usd", ratio: 26.9, sum: 0 },
-          { name: "euro", ratio: 31.56, sum: 0 },
-        ],
+        sum: rentSum,
       },
     ],
   },
@@ -41,8 +36,12 @@ const categoriesSlice = createSlice({
     },
     changeCategory(state, action) {
       state.categories.forEach((el) =>
-        el.name === action.payload.name
-          ? (el.sum = getSum(action.payload.sum, el.sum))
+        el.name === action.payload.name && el.type === action.payload.type
+          ? (el.sum = getSum(
+              action.payload.sum,
+              el.sum,
+              action.payload.currency
+            ))
           : el
       );
     },
@@ -50,5 +49,5 @@ const categoriesSlice = createSlice({
 });
 
 export default categoriesSlice.reducer;
-export const { addCategory, deleteCategory, changeCategory} =
+export const { addCategory, deleteCategory, changeCategory } =
   categoriesSlice.actions;

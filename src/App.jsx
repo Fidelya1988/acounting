@@ -30,7 +30,7 @@ function App() {
   useNewSum(expense, currency, setNewExpense);
   return (
     <div className={styles.app}>
-      <CountingForm />
+      <CountingForm currency={currency} />
       <div className={styles.block}>
         <select
           id="currency"

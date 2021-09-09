@@ -1,30 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getSum } from "../helpers/getSum";
+import { getCurrencyExchange } from "../helpers/getCurrencyExchange";
+const income = getCurrencyExchange();
+const expense = getCurrencyExchange();
+console.log(income);
 const toolkitSlice = createSlice({
   name: "toolkit",
   initialState: {
-    income: [
-      { name: "uah", ratio: 1, sum: 0 },
-      { name: "usd", ratio: 26.9, sum: 0 },
-      { name: "euro", ratio: 31.56, sum: 0 },
-    ],
-    expense: [
-      { name: "uah", ratio: 1, sum: 0 },
-      { name: "usd", ratio: 26.9, sum: 0 },
-      { name: "euro", ratio: 31.56, sum: 0 },
-    ],
+    income,
+    expense,
   },
   reducers: {
     changeIncome(state, action) {
-      state.income = getSum(action.payload.data, state.income);
+      console.log(action.payload);
+      state.income = getSum(
+        action.payload.data,
+        state.income,
+        action.payload.currency
+      );
     },
 
     changeExpense(state, action) {
-      state.expense = getSum(action.payload.data, state.expense);
+      state.expense = getSum(
+        action.payload.data,
+        state.expense,
+        action.payload.currency
+      );
     },
   },
 });
-console.log(toolkitSlice);
+
 export default toolkitSlice.reducer;
 export const { changeIncome, changeExpense, replaceIncome } =
   toolkitSlice.actions;

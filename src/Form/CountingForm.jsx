@@ -11,19 +11,19 @@ const validation = (values) => {
   values.introduce.match(!/[0-9]/) && (errors.introduce = "error");
 };
 
-export default function CountingForm() {
+export default function CountingForm({currency}) {
   const dispatch = useDispatch();
 
   const { categories } = useSelector((state) => state.categories);
-  const { currentCurrency } = useSelector((state) => state.currency);
+
 
   const handleSubmit = React.useCallback(
     (introduce,  category, type) => {
-      type === "expense" && dispatch(changeExpense({ data: introduce }));
-      type === "income" && dispatch(changeIncome({ data: introduce }));
-      dispatch(changeCategory({ name: category, sum: introduce }));
+      type === "expense" && dispatch(changeExpense({ data: introduce, currency }));
+      type === "income" && dispatch(changeIncome({ data: introduce, currency }));
+      dispatch(changeCategory({ name: category, sum: introduce, currency, type}));
     },
-    [dispatch]
+    [dispatch, currency]
   );
 
   const categoriesSelectExpense = categories.map(
@@ -55,7 +55,7 @@ export default function CountingForm() {
           <label htmlFor="introduce">Sum</label>
           <Field type="text" id="introduce" name="introduce" />
           
-          {" " + currentCurrency.toUpperCase()}
+          {" " + currency.toUpperCase()}
           <Field component="select" id="category" name="category">
             <option value="Without">Without category</option>
             {categoriesSelectExpense}
