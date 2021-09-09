@@ -1,5 +1,5 @@
 // import { isBlock } from "typescript";
-import React from "react";
+import React, { useState, useCallback } from "react";
 import styles from "../app.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { changeIncome, changeExpense } from "../store/toolkitReducer";
@@ -11,30 +11,40 @@ const validation = (values) => {
   values.introduce.match(!/[0-9]/) && (errors.introduce = "error");
 };
 
-export default function CountingForm({currency}) {
+export default function CountingForm({ currency }) {
   const dispatch = useDispatch();
 
   const { categories } = useSelector((state) => state.categories);
-
+  const [type, setType] = useState();
 
   const handleSubmit = React.useCallback(
-    (introduce,  category, type) => {
-      type === "expense" && dispatch(changeExpense({ data: introduce, currency }));
-      type === "income" && dispatch(changeIncome({ data: introduce, currency }));
-      dispatch(changeCategory({ name: category, sum: introduce, currency, type}));
+    (introduce, category, type) => {
+      type === "expense" &&
+        dispatch(changeExpense({ data: introduce, currency }));
+      type === "income" &&
+        dispatch(changeIncome({ data: introduce, currency }));
+      dispatch(
+        changeCategory({ name: category, sum: introduce, currency, type })
+      );
     },
     [dispatch, currency]
   );
 
-  const categoriesSelectExpense = categories.map(
+  const handleType = useCallback(
+    (e) => {
+      setType(e.target.value);
+    },
+    [setType]
+  );
+  const select = categories.map(
     (c) =>
-      c.type === "expense" && (
+      c.type === type && (
         <option key={c.id} id={c.id} value={c.name}>
           {c.name}
         </option>
       )
   );
-
+ 
   return (
     <Formik
       initialValues={{
@@ -54,19 +64,29 @@ export default function CountingForm({currency}) {
         <div className={styles.introduce}>
           <label htmlFor="introduce">Sum</label>
           <Field type="text" id="introduce" name="introduce" />
-          
+
           {" " + currency.toUpperCase()}
           <Field component="select" id="category" name="category">
             <option value="Without">Without category</option>
-            {categoriesSelectExpense}
+            {select}
           </Field>
           <div>
             <label>
-              <Field type="radio" name="type" value="expense" />
+              <Field
+                type="radio"
+                name="type"
+                value="expense"
+                onClick={handleType}
+              />
               Expense
             </label>
             <label>
-              <Field type="radio" name="type" value="income" />
+              <Field
+                type="radio"
+                name="type"
+                value="income"
+                onClick={handleType}
+              />
               Income
             </label>
           </div>
