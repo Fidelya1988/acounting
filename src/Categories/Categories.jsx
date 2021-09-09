@@ -1,6 +1,6 @@
 // import { isBlock } from "typescript";
 import { useState } from "react";
-import styles from "../app.module.css";
+
 import { useSelector } from "react-redux";
 
 import { useCategories } from "../helpers/useCategories";

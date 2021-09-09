@@ -31,9 +31,7 @@ const categoriesSlice = createSlice({
         (el) => el.id !== action.payload.id
       );
     },
-    setCoeff(state, action) {
-      state.coefficient = action.payload.coefficient;
-    },
+  
     changeCategory(state, action) {
       state.categories.forEach((el) =>
         el.name === action.payload.name && el.type === action.payload.type
