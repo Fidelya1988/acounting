@@ -6,13 +6,14 @@ import { useSelector } from "react-redux";
 import Categories from "../Categories/Categories";
 import { useNewSum } from "../helpers/useNewSum";
 
-const Counter = ({ title, currency, counting, sum, sumSetter }) => {
+const Counter = ({ title, currency, counting, sum, sumSetter, type }) => {
+
   useNewSum(sum, currency, sumSetter);
   return (
     <div className={styles.block}>
       <h1>{title}</h1>
       <span> {counting ? counting : 0}</span> {currency}
-      <Categories currency={currency} />
+      <Categories currency={currency} type = {type} />
     </div>
   );
 };
@@ -30,6 +31,7 @@ export default function Counters({ currency }) {
         counting={newIncome}
         sum={income}
         sumSetter={setNewIncome}
+        type= 'income'
       />
       <Counter
         title="Expenses"
@@ -37,6 +39,7 @@ export default function Counters({ currency }) {
         counting={newExpense}
         sum={expense}
         sumSetter={setNewExpense}
+        type= 'expense'
       />
     </>
   );

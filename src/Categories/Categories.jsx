@@ -1,20 +1,21 @@
 // import { isBlock } from "typescript";
-import { useState } from "react";
-
+import { useState} from "react";
+// import { Formik, Field, Form } from "formik";
 import { useSelector } from "react-redux";
-
 import { useCategories } from "../helpers/useCategories";
 
-export default function Categories({ currency }) {
+import AddNewCategories from "./NewCategories/AddNewCategories";
+export default function Categories({ currency, type }) {
   const { categories } = useSelector((state) => state.categories);
   const [expenseCategories, setExpenseCategories] = useState();
-  useCategories(categories, currency, setExpenseCategories);
+
+  useCategories(categories, currency, setExpenseCategories, type);
 
   return (
     <div>
       {" "}
       {expenseCategories}
-      <button>+</button>
+      <AddNewCategories type={type} />
     </div>
   );
 }
