@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import toolkitReducer from "./toolkitReducer";
+import counterReducer from "./counterReducer";
 import categoriesReducer from "./categoriesReducer";
 import currencyReducer from "./currencyReducer";
 const rootReducer = combineReducers({
-    toolkit: toolkitReducer,
+    counter: counterReducer,
     categories: categoriesReducer,
     currency: currencyReducer
 })

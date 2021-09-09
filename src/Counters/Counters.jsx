@@ -2,7 +2,6 @@
 import { useState } from "react";
 import styles from "../app.module.css";
 import { useSelector } from "react-redux";
-
 import Categories from "../Categories/Categories";
 import { useNewSum } from "../helpers/useNewSum";
 
@@ -18,7 +17,7 @@ const Counter = ({ title, currency, counting, sum, sumSetter, type }) => {
   );
 };
 export default function Counters({ currency }) {
-  const { income, expense } = useSelector((state) => state.toolkit);
+  const { income, expense } = useSelector((state) => state.counter);
   const [newIncome, setNewIncome] = useState();
 
   const [newExpense, setNewExpense] = useState();

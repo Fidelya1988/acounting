@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from "react";
 import styles from "../app.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { changeIncome, changeExpense } from "../store/toolkitReducer";
+import { changeIncome, changeExpense } from "../store/counterReducer";
 import { changeCategory } from "../store/categoriesReducer";
 
 import { Formik, Form, Field } from "formik";

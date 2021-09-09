@@ -3,9 +3,9 @@ import { getSum } from "../helpers/getSum";
 import { getCurrencyExchange } from "../helpers/getCurrencyExchange";
 const income = getCurrencyExchange();
 const expense = getCurrencyExchange();
-console.log(income);
-const toolkitSlice = createSlice({
-  name: "toolkit",
+
+const counterSlice = createSlice({
+  name: "counter",
   initialState: {
     income,
     expense,
@@ -30,6 +30,6 @@ const toolkitSlice = createSlice({
   },
 });
 
-export default toolkitSlice.reducer;
+export default counterSlice.reducer;
 export const { changeIncome, changeExpense, replaceIncome } =
-  toolkitSlice.actions;
+  counterSlice.actions;
