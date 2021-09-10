@@ -1,18 +1,18 @@
 // import { isBlock } from "typescript";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "../app.module.css";
 import { useSelector } from "react-redux";
 import Categories from "../Categories/Categories";
 import { useNewSum } from "../helpers/useNewSum";
-
+import { currencyContext } from "../App";
 const Counter = ({ title, currency, counting, sum, sumSetter, type }) => {
-
+ const {currencyIcon} = useContext(currencyContext)
   useNewSum(sum, currency, sumSetter);
   return (
     <div className={styles.block}>
       <h1>{title}</h1>
-      <span> {counting ? counting : 0}</span> {currency}
-      <Categories currency={currency} type = {type} />
+      <span> {counting ? counting : 0}</span> {currencyIcon}
+      <Categories currency={currencyIcon} type = {type} />
     </div>
   );
 };
