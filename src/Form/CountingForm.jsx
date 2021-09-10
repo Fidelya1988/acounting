@@ -5,15 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeIncome, changeExpense } from "../store/counterReducer";
 import { changeCategory } from "../store/categoriesReducer";
 import { Formik, Form, Field } from "formik";
-
 import { currencyContext } from "../App";
-
+import CategiriesSelect from "./Inputs/CategoriesSelect";
+import TypeRadioButton from "./Inputs/TypeRadioButton";
 export default function CountingForm() {
   const { currencyIcon, currency } = useContext(currencyContext);
 
   const dispatch = useDispatch();
-  const { categories } = useSelector((state) => state.categories);
-  const [type, setType] = useState('income');
+
+  const [type, setType] = useState("income");
 
   const handleSubmit = React.useCallback(
     (introduce, category, type) => {
@@ -28,23 +28,6 @@ export default function CountingForm() {
     [dispatch, currency]
   );
 
-  const handleType = useCallback(
-    (e) => {
-      setType(e.target.value);
-    },
-    [setType]
-  );
-  const select = categories.map((c) => {
-    console.log(type+c.type)
-    return (
-      c.type === type && (
-        <option key={c.id} id={c.id} value={c.name}>
-          {c.name}
-        </option>
-      )
-    );
-  });
-  console.log(select);
   return (
     <Formik
       initialValues={{
@@ -70,40 +53,11 @@ export default function CountingForm() {
         </div>
 
         <div>
-          <label>
-            <Field
-              type="radio"
-              name="type"
-              value="expense"
-              onClick={handleType}
-            />
-            Expense
-          </label>
-          <label>
-            <Field
-              type="radio"
-              name="type"
-              value="income"
-              onClick={handleType}
-            />
-            Income
-          </label>
+          <TypeRadioButton value="expense" setType={setType} />
+          <TypeRadioButton value="income" setType={setType} />
         </div>
-        <div>
-          {" "}
-          <label>
-            <span>Category</span>
-            <Field
-              component="select"
-              id="category"
-              name="category"
-              className={styles.categorySelect}
-            >
-              <option value="Without">Without category</option>
-              {select}
-            </Field>
-          </label>
-        </div>
+        <CategiriesSelect type={type} />
+
         <button type="submit" className={styles.submit}>
           Count
         </button>
