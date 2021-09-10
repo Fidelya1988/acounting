@@ -1,0 +1,18 @@
+.addButton, .addInput {
+    border: 1px solid rgb(27, 112, 161);
+    padding:0;
+    background: rgb(255, 255, 255);
+    width: 2rem;
+    height: 2rem;
+    color: rgb(80, 79, 79);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  margin-top: 0.6rem;
+  font-weight: 400;
+}
+
+
+.addInput {
+    width: 7rem;
+}

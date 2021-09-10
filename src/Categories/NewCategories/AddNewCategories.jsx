@@ -2,10 +2,9 @@
 import { useState, useCallback } from "react";
 // import { Formik, Field, Form } from "formik";
 import { useDispatch } from "react-redux";
-
+import styles from "../categories.module.css";
 import { addCategory } from "../../store/categoriesReducer";
 import { getCurrencyExchange } from "../../helpers/getCurrencyExchange";
-
 
 export default function AddNewCategories({ type }) {
   const [showInput, setShowInput] = useState(false);
@@ -26,9 +25,14 @@ export default function AddNewCategories({ type }) {
   );
   return (
     <>
-      {!showInput && <button onClick={handleClick}>+</button>}
+      {!showInput && (
+        <button onClick={handleClick} className={styles.addButton}>
+          +
+        </button>
+      )}
       {showInput && (
         <input
+          className={styles.addInput}
           onBlur={(e) => {
             handleBlur(e);
           }}
