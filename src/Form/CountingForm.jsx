@@ -58,6 +58,7 @@ export default function CountingForm() {
     >
       <Form>
         <div>
+   
           <Field
             type="number"
             id="introduce"
@@ -90,14 +91,14 @@ export default function CountingForm() {
         <div>
           {" "}
           <label>
-            Catergory:
-            <Field component="select" id="category" name="category">
+           <span>Category</span>
+            <Field component="select" id="category" name="category" className ={styles.categorySelect}>
               <option value="Without">Without category</option>
               {select}
             </Field>
           </label>
         </div>
-        <button type="submit">Count</button>
+        <button type="submit" className ={styles.submit}>Count</button>
       </Form>
     </Formik>
   );
