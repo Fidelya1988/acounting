@@ -1,15 +1,12 @@
 // import { isBlock } from "typescript";
 import React, { useState, useCallback } from "react";
-import styles from "../app.module.css";
+import styles from "./form.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { changeIncome, changeExpense } from "../store/counterReducer";
 import { changeCategory } from "../store/categoriesReducer";
+import * as Yup from "yup";
 
 import { Formik, Form, Field } from "formik";
-const validation = (values) => {
-  const errors = {};
-  values.introduce.match(!/[0-9]/) && (errors.introduce = "error");
-};
 
 export default function CountingForm({ currency }) {
   const dispatch = useDispatch();
@@ -44,7 +41,7 @@ export default function CountingForm({ currency }) {
         </option>
       )
   );
- 
+
   return (
     <Formik
       initialValues={{
@@ -53,23 +50,18 @@ export default function CountingForm({ currency }) {
         category: "Without",
         type: "income",
       }}
-      validat={validation}
       onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2));
         const { introduce, category, type } = values;
         handleSubmit(introduce, category, type);
       }}
     >
-      <Form>
-        <div className={styles.introduce}>
-          <label htmlFor="introduce">Sum</label>
-          <Field type="text" id="introduce" name="introduce" />
+      <Form  >
+     
+         
+          <div>
+            <Field type="number" id="introduce" name="introduce"  /> {" " + currency.toUpperCase()}
+          </div>
 
-          {" " + currency.toUpperCase()}
-          <Field component="select" id="category" name="category">
-            <option value="Without">Without category</option>
-            {select}
-          </Field>
           <div>
             <label>
               <Field
@@ -90,8 +82,18 @@ export default function CountingForm({ currency }) {
               Income
             </label>
           </div>
+          <div>
+            {" "}
+            <label>
+              Catergory:
+              <Field component="select" id="category" name="category">
+                <option value="Without">Without category</option>
+                {select}
+              </Field>
+            </label>
+          </div>
           <button type="submit">Count</button>
-        </div>
+      
       </Form>
     </Formik>
   );
