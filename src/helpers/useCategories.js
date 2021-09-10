@@ -1,17 +1,30 @@
 import React from "react";
 import { sliceSum } from "./sliceSum";
-
+const style = {
+  border: "1px solid rgb(27, 112, 161)",
+  paddingBottom: "0.55rem",
+  background: "rgb(27, 112, 161)",
+  width: "1rem",
+  height: "1rem",
+  color: "white",
+  display: "inline-flex",
+  justifyContent: "center",
+  alignItems: "center" ,
+  marginTop: "0.6rem",
+  fontWeight: "400",
+  borderRadius: '0.2rem'
+};
 export const useCategories = (
   categories,
   currency,
   setter,
   type,
-  currencyIcon
+  currencyIcon,
+  handleDelete
 ) => {
   React.useEffect(() => {
     const categoriesArr = categories.map((c) => {
       const currentSum = c.sum.map((el) => {
-
         return el.name === currency && el.sum;
       });
 
@@ -22,11 +35,14 @@ export const useCategories = (
       return (
         c.type === type && (
           <div key={c.id}>
-            {c.name}: {slicedCurrentSum} {currencyIcon}
+            {c.name}: {slicedCurrentSum} {currencyIcon}{" "}
+            <button onClick={()=>handleDelete(c.id)} style={style}>
+              -
+            </button>
           </div>
         )
       );
     });
     setter(categoriesArr);
-  }, [categories, currency, setter, type, currencyIcon]);
+  }, [categories, currency, setter, type, currencyIcon, handleDelete]);
 };

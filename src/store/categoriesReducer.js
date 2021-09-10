@@ -6,7 +6,7 @@ const rentSum = getCurrencyExchange();
 const categoriesSlice = createSlice({
   name: "categories",
   initialState: {
-   
+    categoriesBacket: [],
     categories: [
       {
         name: "Food",
@@ -28,8 +28,10 @@ const categoriesSlice = createSlice({
     },
     deleteCategory(state, action) {
       state.categories = state.categories.filter(
-        (el) => el.id !== action.payload.id
-      );
+        (el) =>{
+          el.id === action.payload&& state.categoriesBacket.push(el)
+         return el.id !== action.payload&& el
+        });
     },
   
     changeCategory(state, action) {
