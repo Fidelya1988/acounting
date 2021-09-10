@@ -12,7 +12,7 @@ const counterSlice = createSlice({
   },
   reducers: {
     changeIncome(state, action) {
-      console.log(action.payload);
+  
       state.income = getSum(
         action.payload.data,
         state.income,

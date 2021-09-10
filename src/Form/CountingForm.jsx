@@ -13,7 +13,7 @@ export default function CountingForm() {
 
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
-  const [type, setType] = useState();
+  const [type, setType] = useState('income');
 
   const handleSubmit = React.useCallback(
     (introduce, category, type) => {
@@ -34,15 +34,17 @@ export default function CountingForm() {
     },
     [setType]
   );
-  const select = categories.map(
-    (c) =>
+  const select = categories.map((c) => {
+    console.log(type+c.type)
+    return (
       c.type === type && (
         <option key={c.id} id={c.id} value={c.name}>
           {c.name}
         </option>
       )
-  );
-
+    );
+  });
+  console.log(select);
   return (
     <Formik
       initialValues={{
@@ -58,7 +60,6 @@ export default function CountingForm() {
     >
       <Form>
         <div>
-   
           <Field
             type="number"
             id="introduce"
@@ -91,14 +92,21 @@ export default function CountingForm() {
         <div>
           {" "}
           <label>
-           <span>Category</span>
-            <Field component="select" id="category" name="category" className ={styles.categorySelect}>
+            <span>Category</span>
+            <Field
+              component="select"
+              id="category"
+              name="category"
+              className={styles.categorySelect}
+            >
               <option value="Without">Without category</option>
               {select}
             </Field>
           </label>
         </div>
-        <button type="submit" className ={styles.submit}>Count</button>
+        <button type="submit" className={styles.submit}>
+          Count
+        </button>
       </Form>
     </Formik>
   );

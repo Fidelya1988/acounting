@@ -11,7 +11,7 @@ export const useCategories = (
   React.useEffect(() => {
     const categoriesArr = categories.map((c) => {
       const currentSum = c.sum.map((el) => {
-        console.log(currency + el.name);
+
         return el.name === currency && el.sum;
       });
 
