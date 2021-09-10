@@ -12,7 +12,7 @@ const Counter = ({ title, currency, counting, sum, sumSetter, type }) => {
     <div className={styles.block}>
       <h1>{title}</h1>
       <span> {counting ? counting : 0}</span> {currencyIcon}
-      <Categories currency={currencyIcon} type = {type} />
+      <Categories  type = {type} />
     </div>
   );
 };

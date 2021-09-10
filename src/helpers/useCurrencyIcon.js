@@ -8,7 +8,7 @@ export const icons = {
 
 export const useCurrencyIcon = (currency, setCurrencyIcon) => {
   useEffect(() => {
-    console.log(currency);
+   
     for (let key in icons) {
       if (currency === key) setCurrencyIcon(icons[key]);
     }
