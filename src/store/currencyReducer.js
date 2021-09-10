@@ -7,7 +7,7 @@ const currencySlice = createSlice({
     exchangeRates: [
       { name: "uah", ratio: 1, active: true, },
       { name: "usd", ratio: 26.9, active: false },
-      { name: "euro", ratio: 31.56, active: false },
+      { name: "eur", ratio: 31.56, active: false },
     ],
   },
   reducers: {

@@ -1,16 +1,17 @@
 // import { isBlock } from "typescript";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import styles from "./form.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { changeIncome, changeExpense } from "../store/counterReducer";
 import { changeCategory } from "../store/categoriesReducer";
-import * as Yup from "yup";
-
 import { Formik, Form, Field } from "formik";
 
-export default function CountingForm({ currency }) {
-  const dispatch = useDispatch();
+import { currencyContext } from "../App";
 
+export default function CountingForm() {
+  const { currencyIcon, currency } = useContext(currencyContext);
+
+  const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
   const [type, setType] = useState();
 
@@ -55,45 +56,48 @@ export default function CountingForm({ currency }) {
         handleSubmit(introduce, category, type);
       }}
     >
-      <Form  >
-     
-         
-          <div>
-            <Field type="number" id="introduce" name="introduce"  /> {" " + currency.toUpperCase()}
-          </div>
+      <Form>
+        <div>
+          <Field
+            type="number"
+            id="introduce"
+            name="introduce"
+            className={styles.input}
+          />{" "}
+          <span className={styles.currency}>{currencyIcon}</span>
+        </div>
 
-          <div>
-            <label>
-              <Field
-                type="radio"
-                name="type"
-                value="expense"
-                onClick={handleType}
-              />
-              Expense
-            </label>
-            <label>
-              <Field
-                type="radio"
-                name="type"
-                value="income"
-                onClick={handleType}
-              />
-              Income
-            </label>
-          </div>
-          <div>
-            {" "}
-            <label>
-              Catergory:
-              <Field component="select" id="category" name="category">
-                <option value="Without">Without category</option>
-                {select}
-              </Field>
-            </label>
-          </div>
-          <button type="submit">Count</button>
-      
+        <div>
+          <label>
+            <Field
+              type="radio"
+              name="type"
+              value="expense"
+              onClick={handleType}
+            />
+            Expense
+          </label>
+          <label>
+            <Field
+              type="radio"
+              name="type"
+              value="income"
+              onClick={handleType}
+            />
+            Income
+          </label>
+        </div>
+        <div>
+          {" "}
+          <label>
+            Catergory:
+            <Field component="select" id="category" name="category">
+              <option value="Without">Without category</option>
+              {select}
+            </Field>
+          </label>
+        </div>
+        <button type="submit">Count</button>
       </Form>
     </Formik>
   );

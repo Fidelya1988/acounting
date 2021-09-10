@@ -1,8 +1,32 @@
 form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 300px;
-  padding: 10px;
-    border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 20rem;
+  width: 20rem;
+  padding: 1.3rem;
+  border: 2px solid rgb(27, 112, 161);
+  border-radius: 1rem;
+  margin: 2rem;
 }
+
+ label {
+   font-size: 0.8rem;
+   margin: 1rem;
+ }
+  .input {
+    width:7rem;
+    height: 2rem;
+    border: 1px solid rgb(27, 112, 161);
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color:rgb(71, 63, 63);
+  }
+
+  .currency {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color:rgb(71, 63, 63);
+  }
