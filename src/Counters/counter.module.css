@@ -1,0 +1,15 @@
+.block {
+ 
+    height: 100vh;
+    border: 1px solid grey;
+    padding: 2rem;
+    width: 15rem;
+    background:rgb(241, 238, 238);
+}
+
+.sum {
+    font-size: 2rem;
+    color:rgb(247, 0, 0);
+    /* border: 1px solid gray;
+    padding: 0.6rem; */
+}

@@ -13,9 +13,12 @@ function App() {
   return (
     <currencyContext.Provider value = {{currencyIcon, currency}}>
     <div className={styles.app}>
+      
       <CountingForm currency={currency} />
+     
       <CurrencySelect setCurrency={setCurrency} />
       <Counters currency={currency} />
+      
     </div>
     </currencyContext.Provider>
   );

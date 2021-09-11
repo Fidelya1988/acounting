@@ -1,3 +1,8 @@
+/* .categories {
+  height: 100vh;
+  border-left: 1px solid grey;
+} */
+
 .addButton,
 .addInput {
   border: 1px solid rgb(27, 112, 161);

@@ -1,12 +1,11 @@
 .app {
     display: flex;
+    justify-content: space-between;
 }
 
 
 
- .block {
-     margin: 20px;
- }
+ 
 
 
   input {
